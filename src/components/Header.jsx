@@ -1,27 +1,35 @@
 // import for Link
 import { Link } from "react-router";
+import { useContext } from "react";
+import { ShopContext } from "../App";
 
+function Links() {
+  const { cartItems } = useContext(ShopContext);
 
-function Links({ cartItemsCount }) {
   return (
     <ul>
       {/* Links */}
       <li>
         {/* <Link to="Link to the cart"> */}
-          <span>Cart</span>
-          <div className="cart-icon">{cartItemsCount}</div>
+        <span>Cart</span>
+        <div>{cartItems.length}</div>
+        <ul>
+          {cartItems.map((cartItem) => {
+            return <li key={cartItem}>{cartItem}</li>;
+          })}
+        </ul>
         {/* </Link> */}
       </li>
     </ul>
   );
 }
 
-export default function Header({ cartItemsCount }) {
+export default function Header() {
   return (
     <header>
       {/* Other header elements */}
       <nav>
-        <Links cartItemsCount={cartItemsCount} />
+        <Links />
       </nav>
     </header>
   );
